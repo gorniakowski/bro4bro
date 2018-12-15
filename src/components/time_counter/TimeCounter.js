@@ -39,11 +39,42 @@ class TimeCounter extends React.Component {
         clearInterval(this.interval);
     }
 
-    render() {
+    renderTime() {
+        const { hours, minutes, seconds } = this.state.currentInterval;
+        return(
+        <tr>
+        <td>{hours}</td>
+        <td>{minutes}</td>
+        <td>{seconds}</td>
+        </tr>
+        )
+    }
+
+    render() { 
+       
+        const { hours, minutes, seconds } = this.state.currentInterval;
         return (
-            <div>
-                <h1>{this.state.currentInterval.hours}:{this.state.currentInterval.minutes}:{this.state.currentInterval.seconds}</h1>
-            </div>
+            <table className="f2 shadow-5 ba grow center">
+                <thead>
+                    <tr>
+                        <td className="pa3">Godzin</td>
+                        <td className="pa3">Minut</td>
+                        <td className="pa3">Sekund</td>
+                    </tr>
+                </thead>
+                
+                
+                <tbody>
+                <tr>
+                <td>{hours}</td>
+                <td>{minutes}</td>
+                <td>{seconds}</td>
+                </tr>
+                </tbody>
+            </table>
+         
+    
+  
         )
     }
 }
@@ -61,7 +92,7 @@ function msToHMS( ms ) {
     // 3- Extract minutes:
     var minutes = parseInt( seconds / 60 ); // 60 seconds in 1 minute
     // 4- Keep only seconds not extracted to minutes:
-    seconds = seconds % 60;
+    seconds = Math.round(seconds % 60);
     return {
         hours: hours,
         minutes: minutes,

@@ -5,6 +5,7 @@ import TimeCounter from './components/time_counter/TimeCounter';
 import Login from './components/login/Login';
 import Navigation from './components/navigation/Navigation';
 import Register from './components/register/Register';
+import Home from './components/home/Home';
 import 'tachyons';
 import './App.css';
 
@@ -18,7 +19,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      route: 'home',
+      route: '',
       signedIn: false
     }
   }
@@ -38,11 +39,9 @@ class App extends Component {
           <Navigation  signedIn={this.state.signedIn} routeChange={this.routeChange} />
           <TimeCounter params={lastMeeting}/>
         </div>
-        {
-          this.state.route ==='login' ? <Login /> :(
-            this.state.route ==='register' ? <Register /> : <h1>Od ostatniego bro</h1>
-           )
-        } 
+       {this.state.route === 'login' && <Login routeChange={this.routeChange} />}
+       {this.state.route === 'register' && <Register  routeChange={this.routeChange}/>}
+       {this.state.route === 'home' && <Home />}
         
         
           

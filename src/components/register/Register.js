@@ -23,9 +23,18 @@ class Register extends React.Component {
                                 id="password"
                         />
                     </div>
+                    <div className="mv3">
+                        <label className="db fw6 lh-copy f6" htmlFor="password">Repeat Password</label>
+                        <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                type="password" 
+                                name="password2"  
+                                id="password2"
+                        />
+                    </div>
                 </fieldset>
                 <div className="">
-                <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
+                <input  onClick = {() => this.props.routeChange('home')} 
+                        className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                         type="submit" 
                         value="Register"
                 />

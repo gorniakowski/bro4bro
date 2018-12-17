@@ -11,8 +11,6 @@ import './App.css';
 
 
 
-const lastMeeting = new Date('July 20, 18 00:20:18 GMT+00:00');
-
 
 class App extends Component {
   
@@ -20,13 +18,22 @@ class App extends Component {
     super();
     this.state = {
       route: '',
-      signedIn: false
+      signedIn: false,
+      lastMeeting: new Date('July 20, 18 00:20:18 GMT+00:00')
     }
   }
 
   routeChange = (route) => {
-    this.setState({route: route})
+    if (route ==='home') {
+      this.setState({route: 'home', signedIn: true})
+    }else {
+      this.setState({route: route, signedIn: false})
+    }
+  }
 
+  clockReset = () => {
+    this.setState({lastMeeting: new Date( )})
+    
   }
   
   
@@ -37,11 +44,11 @@ class App extends Component {
         <div>
           <Particles className='Particles' params={particlesOptions} />
           <Navigation  signedIn={this.state.signedIn} routeChange={this.routeChange} />
-          <TimeCounter params={lastMeeting}/>
+          <TimeCounter params={this.state.lastMeeting}/>
         </div>
        {this.state.route === 'login' && <Login routeChange={this.routeChange} />}
        {this.state.route === 'register' && <Register  routeChange={this.routeChange}/>}
-       {this.state.route === 'home' && <Home />}
+       {this.state.route === 'home' && <Home clockReset={this.clockReset} />}
         
         
           

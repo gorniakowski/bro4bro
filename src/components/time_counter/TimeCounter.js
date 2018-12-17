@@ -16,6 +16,13 @@ class TimeCounter extends React.Component {
         
     }
 
+    componentDidUpdate(props) {
+        if(this.props.params != props.params) {
+            this.setState({lastMeeting: this.props.params})
+        }
+
+    }
+
     calcTimeLastMeeting = () => {
         const currentDate = new Date();
         const timespan = currentDate - this.state.lastMeeting

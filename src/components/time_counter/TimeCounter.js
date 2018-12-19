@@ -17,7 +17,7 @@ class TimeCounter extends React.Component {
     }
 
     componentDidUpdate(props) {
-        if(this.props.params != props.params) {
+        if(this.props.params !== props.params) {
             this.setState({lastMeeting: this.props.params})
         }
 

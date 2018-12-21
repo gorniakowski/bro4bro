@@ -1,1 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="930px" height="540px" viewBox="0 0 930 540" preserveAspectRatio="xMidYMid meet" ><rect id="svgEditorBackground" x="0" y="0" width="930" height="540" style="fill: none; stroke: none;"/><circle id="e1_circle" cx="434" cy="61" style="fill:khaki;stroke:black;stroke-width:1px;" r="52.810983706"/><circle id="e2_circle" cx="280" cy="269" style="fill:khaki;stroke:black;stroke-width:1px;" r="52.810983706"/><circle id="e3_circle" cx="570" cy="279" style="fill:khaki;stroke:black;stroke-width:1px;" r="52.810983706"/><line id="e2_line" x1="479" y1="87" x2="551" y2="228" style="stroke:black;fill:none;stroke-width:10px;"/><line id="e3_line" x1="396" y1="98" x2="299" y2="221" style="stroke:black;fill:none;stroke-width:10px;"/><line id="e4_line" x1="520" y1="294" x2="329" y2="284" style="stroke:black;fill:none;stroke-width:10px;"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" 
+xmlns:xlink="http://www.w3.org/1999/xlink" 
+width="930px" 
+height="540px" 
+viewBox="0 0 930 540" 
+preserveAspectRatio="xMidYMid meet" >
+<rect id="svgEditorBackground" x="0" y="0" width="930" height="540" style="fill: none; stroke: none;"/>
+<circle id="e1_circle" cx="434" cy="61" style="fill:khaki;stroke:black;stroke-width:1px;" r="52.810983706"/>
+<circle id="e2_circle" cx="280" cy="269" style="fill:khaki;stroke:black;stroke-width:1px;" r="52.810983706"/>
+<circle id="e3_circle" cx="570" cy="279" style="fill:khaki;stroke:black;stroke-width:1px;" r="52.810983706"/>
+<line id="e2_line" x1="479" y1="87" x2="551" y2="228" style="stroke:black;fill:none;stroke-width:10px;"/>
+<line id="e3_line" x1="396" y1="98" x2="299" y2="221" style="stroke:black;fill:none;stroke-width:10px;"/>
+<line id="e4_line" x1="520" y1="294" x2="329" y2="284" style="stroke:black;fill:none;stroke-width:10px;"/>
+<!--
+ <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0 0 0"
+      to="360 0 0"
+      dur="10s"
+      repeatCount="indefinite"
+    />
+    -->
+</svg>

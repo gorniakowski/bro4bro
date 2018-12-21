@@ -7,7 +7,7 @@ import Navigation from './components/navigation/Navigation';
 import Register from './components/register/Register';
 import Home from './components/home/Home';
 import 'tachyons';
-import style from './App.css';
+import './App.css';
 
 
 
@@ -20,8 +20,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      style : style,
-      route: '',
+      route: 'home',
       signedIn: false,
       lastMeeting: new Date('July 20, 18 00:20:18 GMT+00:00')
     }

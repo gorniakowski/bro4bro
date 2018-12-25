@@ -1,4 +1,26 @@
-.rotate-center {
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
-	animation: rotate-center 3s linear 1s infinite both;
+.glass{
+    position: relative;          
+    width: 180px;                 
+    height: 245px;                
+    background-color: rgba(150,150,150,1); 
+    border-radius: 5px ;           
+    border: 10px solid lightgray; 
+    border-top: none ;             
+    overflow: hidden              
+}
+.handle {
+	content: "";
+	position: relative;
+	top: 0px;
+	right: 10px;
+	width: 80px;
+	height: 180px;
+	border: 20px solid lightgray;
+	border-radius: 25px;
 }

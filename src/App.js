@@ -20,7 +20,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      route: 'home',
+      route: '',
       signedIn: false,
       lastMeeting: new Date('July 20, 18 00:20:18 GMT+00:00')
     }

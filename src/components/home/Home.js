@@ -1,5 +1,6 @@
 import React from 'react';
 import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
+import './image.css'
 
 
 
@@ -14,8 +15,9 @@ class Home extends React.Component {
     }
 
     dropped = (e) => {
-        this.setState({readyForBro: true})
+        this.setState({readyForBro: true});
         e.containerElem.style.visibility = 'hidden';
+        console.log ('Wysyłam na serwer chęć browara bzz bzz bzz'); //to chyba trzeba będzie zaimlementować.
 
 
 
@@ -26,18 +28,21 @@ class Home extends React.Component {
         return (
             <div>
 
-                <DragDropContainer targetKey="browar" >
+                <DragDropContainer targetKey="browar" className="center pa5" >
                     <div>MOrda</div>
                 </DragDropContainer>
                 
                 <DropTarget targetKey="browar" onHit={this.dropped}>
-                    <div className="h5 yellow ba  fl w-100 pa2 mw5">
-                        {this.state.readyForBro && <div>MOrda</div>}
+                    <div className="container pa4">
+                        <div className="glass">
+                            {this.state.readyForBro && <div>MOrda</div>}
 
+                        </div>
+                        <div className="handle"></div>
                     </div>
                 </DropTarget>
                 
-                <a class="f3 link dim ba ph3 pv2 mb2 dib black shadow-5 " 
+                <a className="f3 link dim ba ph3 pv2 mb2 dib black shadow-5 " 
                    href="#0"
                    onClick={this.props.clockReset}
                    >

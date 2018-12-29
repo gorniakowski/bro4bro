@@ -26,6 +26,17 @@ class App extends Component {
     }
   }
 
+
+  componentDidMount() {
+    fetch('http://localhost:3000')
+    .then(response => response.json())
+    .then(data => {
+      this.setState({lastMeeting: data[0]});
+      console.log(data[0].time);
+  
+    })
+  }
+
   routeChange = (route) => {
     if (route ==='home') {
       this.setState({route: 'home', signedIn: true})

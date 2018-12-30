@@ -31,10 +31,11 @@ class App extends Component {
     fetch('http://localhost:3000')
     .then(response => response.json())
     .then(data => {
-      this.setState({lastMeeting: data[0]});
+      this.setState({lastMeeting: new Date(data[0].time)});
       console.log(data[0].time);
   
     })
+    
   }
 
   routeChange = (route) => {

@@ -5,6 +5,7 @@ import React from 'react';
 2- passwords cannot be empty
 3  - email can't be empty
 4 -email is not valid
+5 - no name provided
 */
 
 
@@ -13,6 +14,7 @@ class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            name: '',
             email:'',
             password: '',
             password2: '',
@@ -32,23 +34,27 @@ class Register extends React.Component {
         this.setState({email: event.target.value});
     }
 
-    handlePassChange= (event) => {
+    handlePassChange = (event) => {
         this.setState({password: event.target.value});
 
     }
 
-    handlePassChange2= (event) => {
+    handlePassChange2 = (event) => {
         this.setState({password2: event.target.value});
         
     }
     
+    handleNameChange = (event) => {
+        this.setState({name: event.target.value});
+    }    
     
     handleSubmit = (event) => {
         event.preventDefault();
 
-        const {password, password2, email} = this.state;
-        if (password !== password2){
-
+        const {password, password2, email, name} = this.state;
+        if (name.length === 0){
+            this.setState({alert: 5})
+        }else if (password !== password2){
             this.setState({alert: 1})
         }else if (password.length === 0 || password2.length === 0){
             this.setState({alert: 2})
@@ -58,7 +64,17 @@ class Register extends React.Component {
             this.setState({alert: 4})
         }
         else {        
-            //console.log(this.state)
+            fetch('http://localhost:3000/register',{
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    email: this.state.email,
+                    password: this.state.password,
+                    name: this.state.name
+                })
+            })
+            .then(res => res.json())
+            .then(user => console.log(user))
             this.props.routeChange('home')
         }
        
@@ -98,6 +114,14 @@ class Register extends React.Component {
         )
     }
 
+    alert5 = () => {
+        return( 
+            <div className="shadow-5 ba center">
+                <h5>What is your name ??</h5>
+            </div>
+        )
+    }
+
 
 
     
@@ -111,10 +135,22 @@ class Register extends React.Component {
             {alert === 2 && <this.alert2 />}
             {alert === 3 && <this.alert3 />}
             {alert === 4 && <this.alert4 />}
+            {alert === 5 && <this.alert5 />}
 
             <form onSubmit= {this.handleSubmit} className="measure center">
                 <fieldset id="register" className="ba b--transparent ph0 mh0">
                     <legend className="f4 fw6 ph0 mh0">Register</legend>
+                    
+                    <div className="mt3">
+                        <label className="db fw6 lh-copy f6" htmlFor="email-address">Name</label>
+                        <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
+                                type="text" 
+                                name="name"  
+                                id="name"
+                                onChange={this.handleNameChange}
+                        />
+                    </div>
+                    
                     <div className="mt3">
                         <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                         <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 

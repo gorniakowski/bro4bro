@@ -38,9 +38,27 @@ class Login extends React.Component {
         }else if (password.length === 0) {
             this.setState({alert:2})
         }else {
-            this.props.routeChange('home')
+            fetch('http://localhost:3000/login',{
+                method: 'post',
+                headers: {'Content-Type': 'application-json'},
+                body: JSON.stringify({
+                    email: this.state.email,
+                    password: this.state.password
+                })
+            })
+            .then(response => response.json())
+            .then(user => {
+                if(user.id){
+                    console.log(user)
+                    this.props.routeChange('home')
+                }
+            })
+
+
         }
+            
     }
+    
 
     alert1 = () => {
         return(

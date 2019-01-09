@@ -40,19 +40,24 @@ class Login extends React.Component {
         }else {
             fetch('http://localhost:3000/login',{
                 method: 'post',
-                headers: {'Content-Type': 'application-json'},
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    email: this.state.email,
+                    username: this.state.email,
                     password: this.state.password
                 })
             })
-            .then(response => response.json())
-            .then(user => {
-                if(user.id){
-                    console.log(user)
-                    this.props.routeChange('home')
+            .then(response => {
+                if (response.status === 400){
+                    this.setState({alert: 3})
+                }else{
+                  return response.json()
                 }
             })
+            .then(user => console.log(user))
+            
+            
+           
+         
 
 
         }
@@ -76,6 +81,14 @@ class Login extends React.Component {
         )
     }
 
+    alert3 = () => {
+        return(
+            <div className="shadow-5 ba center">
+                <h5>Wrong username or password</h5>
+            </div>
+        )
+    }
+
     render() {
         const {alert}= this.state
         return (
@@ -84,6 +97,7 @@ class Login extends React.Component {
 
             { alert === 1 && <this.alert1 /> }
             { alert === 2 && <this.alert2 /> }
+            { alert === 3 && <this.alert3 /> }
 
 
                 

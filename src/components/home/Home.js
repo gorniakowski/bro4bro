@@ -18,7 +18,12 @@ class Home extends React.Component {
     dropped = (e) => {
         this.setState({readyForBro: true});
         e.containerElem.style.visibility = 'hidden';
-        console.log ('Wysyłam na serwer chęć browara bzz bzz bzz'); //to chyba trzeba będzie zaimlementować.
+        fetch('http://localhost:3000',{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'}
+            
+
+        }) //to chyba trzeba będzie zaimlementować.
 
 
 

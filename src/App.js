@@ -22,9 +22,17 @@ class App extends Component {
     this.state = {
       route: '',
       signedIn: false,
-      lastMeeting: new Date('July 20, 18 00:20:18 GMT+00:00')
+      lastMeeting: new Date('July 20, 18 00:20:18 GMT+00:00'),
+      user: {
+        name: '',
+        ready4bro: false,
+        email: '' 
+      }
     }
   }
+
+
+  
 
 
   componentDidMount() {
@@ -36,6 +44,14 @@ class App extends Component {
   
     })
     
+  }
+
+  loadUser = (data) => {
+    this.setState({user:{
+      name: data.name,
+      ready4bro: data.ready4bro,
+      email: data.email
+    }})
   }
 
   routeChange = (route) => {
@@ -61,9 +77,9 @@ class App extends Component {
           <Particles className='Particles' params={particlesOptions} />
          <div className="TimeCounter"><TimeCounter params={this.state.lastMeeting}/> </div>
         </div>
-       {this.state.route === 'login' && <Login routeChange={this.routeChange} />}
+       {this.state.route === 'login' && <Login routeChange={this.routeChange}  loadUser={this.loadUser}/>}
        {this.state.route === 'register' && <Register  routeChange={this.routeChange}/>}
-       {this.state.route === 'home' && <Home clockReset={this.clockReset} />}
+       {this.state.route === 'home' && <Home clockReset={this.clockReset} user={this.state.user}/>}
         
         
           

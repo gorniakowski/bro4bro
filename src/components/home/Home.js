@@ -7,10 +7,11 @@ import './image.css'
 
 class Home extends React.Component {
     
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            readyForBro: false
+            readyForBro: this.props.user.readyForBro,
+            name: this.props.user.name
         }
     }
 
@@ -23,19 +24,25 @@ class Home extends React.Component {
 
     }
 
+    dragContainer = () => {
+        const  { name } = this.state
+        return (<DragDropContainer targetKey="browar" className="center pa5" >
+        <div>{name}</div>
+    </DragDropContainer>)
+    }
+
 
     render() {
+        const { name } = this.state
         return (
             <div>
 
-                <DragDropContainer targetKey="browar" className="center pa5" >
-                    <div>MOrda</div>
-                </DragDropContainer>
+               {!this.state.readyForBro && <this.dragContainer/>}
                 
                 <DropTarget targetKey="browar" onHit={this.dropped}>
                     <div className="container pa4">
                         <div className="glass">
-                            {this.state.readyForBro && <div>MOrda</div>}
+                            {this.state.readyForBro && <div>{name}</div>}
 
                         </div>
                         <div className="handle"></div>

@@ -47,13 +47,16 @@ class Login extends React.Component {
                 })
             })
             .then(response => {
-                if (response.status === 400){
+                if (response.status === 400 || response.status === 401){
                     this.setState({alert: 3})
                 }else{
                   return response.json()
                 }
             })
-            .then(user => console.log(user))
+            .then(user => {
+                this.props.loadUser(user)
+                this.props.routeChange('home')
+            })
             
             
            

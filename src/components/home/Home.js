@@ -18,9 +18,12 @@ class Home extends React.Component {
     dropped = (e) => {
         this.setState({readyForBro: true});
         e.containerElem.style.visibility = 'hidden';
-        fetch('http://localhost:3000',{
+        fetch('http://localhost:3000/ready4bro',{
             method: 'post',
-            headers: {'Content-Type': 'application/json'}
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                readyForBro: this.state.readyForBro
+            })
             
 
         }) //to chyba trzeba będzie zaimlementować.

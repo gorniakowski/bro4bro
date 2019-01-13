@@ -19,9 +19,10 @@ class Home extends React.Component {
         this.setState({readyForBro: true});
         e.containerElem.style.visibility = 'hidden';
         fetch('http://localhost:3000/ready4bro',{
-            credentials: 'same-origin',
-            method: 'post',
+            method: 'POST',
+            credentials: 'include',
             headers: {'Content-Type': 'application/json'},
+            
             body: JSON.stringify({
                 readyForBro: this.state.readyForBro
             })

@@ -22,7 +22,6 @@ class Home extends React.Component {
             method: 'POST',
             credentials: 'include',
             headers: {'Content-Type': 'application/json'},
-            
             body: JSON.stringify({
                 readyForBro: this.state.readyForBro
             })

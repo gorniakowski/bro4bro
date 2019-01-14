@@ -40,6 +40,7 @@ class Login extends React.Component {
         }else {
             fetch('http://localhost:3000/login',{
                 method: 'post',
+                credentials: 'include',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     username: this.state.email,

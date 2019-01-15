@@ -27,7 +27,10 @@ class Home extends React.Component {
             })
         }) 
         .then(result => {
-            console.log(result)
+           if(result.status !== 200) {
+               alert('SZOTING ŁONG')
+               this.setState({readyForBro: false})
+           }
         })
 
 

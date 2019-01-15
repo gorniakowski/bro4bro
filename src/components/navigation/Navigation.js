@@ -3,6 +3,15 @@ import React from 'react';
 class Navigation extends React.Component {
     
 
+    handleLogout = () => {
+        fetch('http://localhost:3000/logout', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'}
+        })
+        this.props.routeChange()
+    }
+
     render () {
         if (!this.props.signedIn) {
             return (
@@ -14,7 +23,7 @@ class Navigation extends React.Component {
         } else {
             return (
                 <nav style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <p onClick={()=>this.props.routeChange(' ')} 
+                    <p onClick={()=>this.handleLogout()} 
                         className='f3 link dim light-blue underline pa3 pointer'>Logout
                     </p>
                 </nav> 

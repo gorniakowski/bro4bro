@@ -9,7 +9,7 @@ class Navigation extends React.Component {
             credentials: 'include',
             headers: {'Content-Type': 'application/json'}
         })
-        this.props.routeChange()
+        this.props.routeChange('')
     }
 
     render () {

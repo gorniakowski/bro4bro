@@ -52,8 +52,9 @@ class Login extends React.Component {
                     this.setState({alert: 3})
                 }else{
                    response.json()
-                   .then(user => {
-                    this.props.loadUser(user)
+                   .then(data => {
+                    this.props.loadUser(data.user)
+                    this.props.loadUsersReady4Bro(data.broReady)
                     this.props.routeChange('home')
                 })
                 }

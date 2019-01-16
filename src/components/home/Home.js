@@ -11,7 +11,8 @@ class Home extends React.Component {
         super(props);
         this.state = {
             readyForBro: this.props.user.readyForBro,
-            name: this.props.user.name
+            name: this.props.user.name,
+            usersReady4Bro: this.props.usersReady4Bro
         }
     }
 
@@ -44,8 +45,11 @@ class Home extends React.Component {
     </DragDropContainer>)
     }
 
+    
+
 
     render() {
+      //  console.log(this.usersReady4Bro)
         const { name } = this.state
         return (
             <div>
@@ -56,6 +60,7 @@ class Home extends React.Component {
                     <div className="container pa4">
                         <div className="glass">
                             {this.state.readyForBro && <div>{name}</div>}
+                          
 
                         </div>
                         <div className="handle"></div>

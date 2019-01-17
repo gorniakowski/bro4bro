@@ -45,11 +45,20 @@ class Home extends React.Component {
     </DragDropContainer>)
     }
 
-    
+    renderUsersReady4Bro = () => (
+
+       <>
+       {this.state.usersReady4Bro.map(user=>(
+            <div key={user.name}>{user.name}</div>)
+        )
+       }    
+       </>
+
+    )
 
 
     render() {
-      //  console.log(this.usersReady4Bro)
+         console.log(this.state.usersReady4Bro)
         const { name } = this.state
         return (
             <div>
@@ -60,7 +69,8 @@ class Home extends React.Component {
                     <div className="container pa4">
                         <div className="glass">
                             {this.state.readyForBro && <div>{name}</div>}
-                          
+                            {<this.renderUsersReady4Bro/>}
+                           
 
                         </div>
                         <div className="handle"></div>

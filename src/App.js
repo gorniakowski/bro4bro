@@ -68,13 +68,17 @@ class App extends Component {
   }
 
   clockReset = () => {
+    fetch('http://localhost:3000/clockreset',{
+      method: 'post',
+      headers:  {'Content-Type': 'application/json'}
+    })
+
     this.setState({lastMeeting: new Date( )})
     
   }
   
   
   render() {
-    console.log(this.state.usersReady4Bro)
     return (
       <div className='App'>
         <Navigation  signedIn={this.state.signedIn} routeChange={this.routeChange} />

@@ -70,6 +70,7 @@ class App extends Component {
   clockReset = () => {
     fetch('http://localhost:3000/clockreset',{
       method: 'post',
+      credentials: 'include',
       headers:  {'Content-Type': 'application/json'}
     })
 

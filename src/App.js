@@ -73,8 +73,16 @@ class App extends Component {
       credentials: 'include',
       headers:  {'Content-Type': 'application/json'}
     })
+    .then(res =>{
+      console.log(res)
+      if (res.status === 200){
+        this.setState({lastMeeting: new Date( )})
+      }else{
+        alert('szomething łooong')
+      }
+    })
 
-    this.setState({lastMeeting: new Date( )})
+    
     
   }
   

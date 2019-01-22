@@ -67,24 +67,10 @@ class App extends Component {
     }
   }
 
-  clockReset = () => {
-    fetch('http://localhost:3000/clockreset',{
-      method: 'post',
-      credentials: 'include',
-      headers:  {'Content-Type': 'application/json'}
-    })
-    .then(res =>{
-      console.log(res)
-      if (res.status === 200){
-        this.setState({lastMeeting: new Date( )})
-      }else{
-        alert('szomething łooong')
-      }
-    })
-
-    
-    
+  resetTimer = () => {
+    this.setState({lastMeeting: new Date()})
   }
+
   
   
   render() {
@@ -101,7 +87,7 @@ class App extends Component {
        loadUsersReady4Bro = {this.loadUsersReady4Bro}
        />}
        {this.state.route === 'register' && <Register  routeChange={this.routeChange}/>}
-       {this.state.route === 'home' && <Home clockReset={this.clockReset} 
+       {this.state.route === 'home' && <Home resetTimer={this.resetTimer} 
        user={this.state.user}
        usersReady4Bro={this.state.usersReady4Bro}
        />}

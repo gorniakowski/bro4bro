@@ -56,6 +56,26 @@ class Home extends React.Component {
 
     )
 
+    broReset = () => {
+        fetch('http://localhost:3000/clockreset',{
+          method: 'post',
+          credentials: 'include',
+          headers:  {'Content-Type': 'application/json'}
+        })
+        .then(res =>{
+          console.log(res)
+          if (res.status === 200){
+            this.setState({usersReady4Bro: []});
+            this.props.resetTimer()
+          }else{
+            alert('szomething łooong')
+          }
+        })
+    
+        
+        
+      }
+
 
     render() {
          console.log(this.state.usersReady4Bro)
@@ -79,7 +99,7 @@ class Home extends React.Component {
                 
                 <a className="f3 link dim ba ph3 pv2 mb2 dib black shadow-5 " 
                    href="#0"
-                   onClick={this.props.clockReset}
+                   onClick={this.broReset}
                    >
                     Browar się odbył !!
                 </a>

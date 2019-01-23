@@ -10,7 +10,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            readyForBro: this.props.user.readyForBro,
+            readyForBro: this.props.user.ready4bro,
             name: this.props.user.name,
             usersReady4Bro: this.props.usersReady4Bro
         }
@@ -45,17 +45,24 @@ class Home extends React.Component {
     </DragDropContainer>)
     }
 
-    renderUsersReady4Bro = () => (
-
-       <>
-       {this.state.usersReady4Bro.map(user=>(
-            <div key={user.name}>{user.name}</div>)
+    renderUsersReady4Bro = () =>{
+        
+        const filterArr = this.state.usersReady4Bro.filter(el =>{
+            return el.name !== this.state.name
+        })
+        
+        
+        return (    
+        <>
+        {filterArr.map(user=>(
+                <div key={user.name}>{user.name}</div>)
+            )
+        }    
+        </>
         )
-       }    
-       </>
-
-    )
-
+        
+    }
+    
     broReset = () => {
         fetch('http://localhost:3000/clockreset',{
           method: 'post',
@@ -65,7 +72,7 @@ class Home extends React.Component {
         .then(res =>{
           console.log(res)
           if (res.status === 200){
-            this.setState({usersReady4Bro: []});
+            this.setState({usersReady4Bro: [], readyForBro:false});
             this.props.resetTimer()
           }else{
             alert('szomething łooong')
@@ -78,7 +85,6 @@ class Home extends React.Component {
 
 
     render() {
-         console.log(this.state.usersReady4Bro)
         const { name } = this.state
         return (
             <div>

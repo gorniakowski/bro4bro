@@ -12,7 +12,8 @@ class Home extends React.Component {
         this.state = {
             readyForBro: this.props.user.ready4bro,
             name: this.props.user.name,
-            usersReady4Bro: this.props.usersReady4Bro
+            usersReady4Bro: this.props.usersReady4Bro,
+            messageSent: false
         }
     }
 
@@ -33,9 +34,28 @@ class Home extends React.Component {
                this.setState({readyForBro: false})
            }
         })
+        this.checkMessageSent();
 
 
 
+    }
+
+
+    checkMessageSent = () => {
+        fetch('http://localhost:3000/messageSent?', {
+            method: 'GET',
+            credentials: 'include',
+            headers: {'Content-Type':'application/json'}
+
+        })
+        .then(res =>{
+            console.log(res)
+            if (res.status === 200) {
+                this.setState({messageSent: true})
+            }else {
+                this.setState({messageSent: false})
+            }
+        })
     }
 
     dragContainer = () => {
@@ -70,7 +90,6 @@ class Home extends React.Component {
           headers:  {'Content-Type': 'application/json'}
         })
         .then(res =>{
-          console.log(res)
           if (res.status === 200){
             this.setState({usersReady4Bro: [], readyForBro:false});
             this.props.resetTimer()
@@ -84,12 +103,28 @@ class Home extends React.Component {
       }
 
 
+    messageSentInfo = () => {
+        return (
+
+            <div className="f3 link dim ba ph3 pv2 mb2 dib grey shadow-5 ">
+                Bro zostali powiadomieni.
+            </div>
+
+        )
+    }
+
+    componentDidMount = () => {
+        this.checkMessageSent()
+    }
+
+
+
     render() {
         const { name } = this.state
         return (
             <div>
-
-               {!this.state.readyForBro && <this.dragContainer/>}
+                {this.state.messageSent && <this.messageSentInfo/>}
+                {!this.state.readyForBro && <this.dragContainer/>}
                 
                 <DropTarget targetKey="browar" onHit={this.dropped}>
                     <div className="container pa4">

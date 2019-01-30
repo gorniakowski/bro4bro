@@ -6,7 +6,7 @@ import './image.css'
 
 
 class Home extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -18,23 +18,24 @@ class Home extends React.Component {
     }
 
     dropped = (e) => {
-        this.setState({readyForBro: true});
+        this.setState({ readyForBro: true });
         e.containerElem.style.visibility = 'hidden';
-        fetch('http://localhost:3000/ready4bro',{
+        fetch('http://localhost:3000/ready4bro', {
             method: 'POST',
             credentials: 'include',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 readyForBro: this.state.readyForBro
             })
-        }) 
-        .then(result => {
-           if(result.status !== 200) {
-               alert('SZOTING ŁONG')
-               this.setState({readyForBro: false})
-           }
         })
-        this.checkMessageSent();
+            .then(result => {
+                if (result.status !== 200) {
+                    alert('SZOTING ŁONG')
+                    this.setState({ readyForBro: false })
+                }
+            })
+            
+        
 
 
 
@@ -45,62 +46,65 @@ class Home extends React.Component {
         fetch('http://localhost:3000/messageSent?', {
             method: 'GET',
             credentials: 'include',
-            headers: {'Content-Type':'application/json'}
+            headers: { 'Content-Type': 'application/json' }
 
         })
-        .then(res =>{
-            console.log(res)
-            if (res.status === 200) {
-                this.setState({messageSent: true})
-            }else {
-                this.setState({messageSent: false})
-            }
-        })
+            .then(res => {
+                console.log(res.status)
+                if (res.status === 200) {
+                    this.setState({ messageSent: true })
+                } else {
+                    this.setState({ messageSent: false })
+                }
+            })
+            .then(data => {
+                setTimeout(this.checkMessageSent, 10000)
+            })
     }
 
     dragContainer = () => {
-        const  { name } = this.state
+        const { name } = this.state
         return (<DragDropContainer targetKey="browar" className="center pa5" >
-        <div>{name}</div>
-    </DragDropContainer>)
+            <div>{name}</div>
+        </DragDropContainer>)
     }
 
-    renderUsersReady4Bro = () =>{
-        
-        const filterArr = this.state.usersReady4Bro.filter(el =>{
+    renderUsersReady4Bro = () => {
+
+        const filterArr = this.state.usersReady4Bro.filter(el => {
             return el.name !== this.state.name
         })
-        
-        
-        return (    
-        <>
-        {filterArr.map(user=>(
-                <div key={user.name}>{user.name}</div>)
-            )
-        }    
-        </>
+
+
+        return (
+            <>
+                {filterArr.map(user => (
+                    <div key={user.name}>{user.name}</div>)
+                )
+                }
+            </>
         )
-        
+
     }
-    
+
     broReset = () => {
-        fetch('http://localhost:3000/clockreset',{
-          method: 'post',
-          credentials: 'include',
-          headers:  {'Content-Type': 'application/json'}
+        fetch('http://localhost:3000/clockreset', {
+            method: 'post',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' }
         })
-        .then(res =>{
-          if (res.status === 200){
-            this.setState({usersReady4Bro: [], readyForBro:false});
-            this.props.resetTimer()
-          }else{
-            alert('szomething łooong')
-          }
-        })
-    
-        
-        
-      }
+            .then(res => {
+                if (res.status === 200) {
+                    this.setState({ usersReady4Bro: [], readyForBro: false });
+                    this.props.resetTimer()
+                } else {
+                    alert('szomething łooong')
+                }
+            })
+
+
+
+    }
 
 
     messageSentInfo = () => {
@@ -119,29 +123,30 @@ class Home extends React.Component {
 
 
 
+
     render() {
         const { name } = this.state
         return (
             <div>
-                {this.state.messageSent && <this.messageSentInfo/>}
-                {!this.state.readyForBro && <this.dragContainer/>}
-                
+                {this.state.messageSent && <this.messageSentInfo />}
+                {!this.state.readyForBro && <this.dragContainer />}
+
                 <DropTarget targetKey="browar" onHit={this.dropped}>
                     <div className="container pa4">
                         <div className="glass">
                             {this.state.readyForBro && <div>{name}</div>}
-                            {<this.renderUsersReady4Bro/>}
-                           
+                            {<this.renderUsersReady4Bro />}
+
 
                         </div>
                         <div className="handle"></div>
                     </div>
                 </DropTarget>
-                
-                <a className="f3 link dim ba ph3 pv2 mb2 dib black shadow-5 " 
-                   href="#0"
-                   onClick={this.broReset}
-                   >
+
+                <a className="f3 link dim ba ph3 pv2 mb2 dib black shadow-5 "
+                    href="#0"
+                    onClick={this.broReset}
+                >
                     Browar się odbył !!
                 </a>
             </div>

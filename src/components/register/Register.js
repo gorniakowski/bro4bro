@@ -46,7 +46,9 @@ class Register extends React.Component {
     
     handleNameChange = (event) => {
         this.setState({name: event.target.value});
-    }    
+    }
+    
+    //handleFileChange = (event)
     
     handleSubmit = (event) => {
         event.preventDefault();
@@ -178,6 +180,7 @@ class Register extends React.Component {
                                 onChange={this.handlePassChange2}
                         />
                     </div>
+                    
                 </fieldset>
                 <div className="">
                 <input 

@@ -1,6 +1,10 @@
 import React from 'react';
 import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
-import './image.css'
+import './image.css';
+import {FilePond, registerPlugin} from 'react-filepond';
+import 'filepond/dist/filepond.min.css';
+
+
 
 
 
@@ -121,6 +125,30 @@ class Home extends React.Component {
         this.checkMessageSent()
     }
 
+    fileUploadComp = () => {
+        return (
+            <div>    
+                {/* Pass FilePond properties as attributes */}
+                <FilePond 
+                          className = "mw4 center pa2"
+                          ref={ref => this.pond = ref}
+                          files={this.state.file}
+                          allowMultiple={false}
+                          //maxFiles={3}
+                          server="http://localhost:3000/upload/"
+                          //oninit={() => this.handleInit() }
+                          onupdatefiles={(fileItems) => {
+                              // Set current file objects to this.state
+                              this.setState({
+                                  files: fileItems.map(fileItem => fileItem.file)
+                              });
+                          }}>
+                </FilePond>
+
+            </div>
+        );
+    }
+
 
 
 
@@ -128,9 +156,10 @@ class Home extends React.Component {
         const { name } = this.state
         return (
             <div>
+                
                 {this.state.messageSent && <this.messageSentInfo />}
                 {!this.state.readyForBro && <this.dragContainer />}
-
+                <this.fileUploadComp />
                 <DropTarget targetKey="browar" onHit={this.dropped}>
                     <div className="container pa4">
                         <div className="glass">
@@ -142,6 +171,10 @@ class Home extends React.Component {
                         <div className="handle"></div>
                     </div>
                 </DropTarget>
+                
+                
+
+
 
                 <a className="f3 link dim ba ph3 pv2 mb2 dib black shadow-5 "
                     href="#0"
